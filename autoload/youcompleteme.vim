@@ -652,7 +652,11 @@ function! s:OnTextChangedInsertMode()
     return
   endif
 
+try
   call s:IdentifierFinishedOperations()
+catch
+  return
+endtry
 
   " We have to make sure we correctly leave semantic mode even when the user
   " inserts something like a "operator[]" candidate string which fails
