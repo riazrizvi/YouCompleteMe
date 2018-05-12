@@ -691,7 +691,11 @@ function! s:OnInsertLeave()
   let s:force_semantic = 0
   let s:completion = s:default_completion
 
+try
   call s:OnFileReadyToParse()
+catch
+    return
+endtry
   exec s:python_command "ycm_state.OnInsertLeave()"
   if g:ycm_autoclose_preview_window_after_completion ||
         \ g:ycm_autoclose_preview_window_after_insertion
